@@ -1,0 +1,72 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:include page="/layout/header.jsp" />
+
+<c:choose>
+	<c:when test="${m.mng}">
+		<form action="/Board-Project1/member.do" method="post">
+			<table border="1" class="table">
+				<caption>
+					<h2>회원 관리 페이지</h2>
+				</caption>
+				<input type="hidden" name="action" value="doMemberM">
+				<input type="hidden" name="uid" value="${member.userid}">
+				<tr>
+					<th>회원번호</th>
+					<td>${member.userid}</td>
+				</tr>
+				<tr>
+					<th>아이디</th>
+					<td><input type="text" name="ID" value="${member.ID}"></td>
+				</tr>
+				<tr>
+					<th>닉네임</th>
+					<td><input type="text" name="nickname" value="${member.nickname}"></td>
+				</tr>
+				<tr>
+					<th>상태</th>
+					<td><select name="ban">
+							<c:choose>
+								<c:when test="${member.ban}">
+									<option value="true" selected>true</option>
+									<option value="false">false</option>
+								</c:when>
+								<c:otherwise>
+									<option value="true">true</option>
+									<option value="false" selected>false</option>
+								</c:otherwise>
+							</c:choose>
+					</select></td>
+				</tr>
+				<tr>
+					<th>권한</th>
+					<td><select name="mng">
+							<c:choose>
+								<c:when test="${member.mng}">
+									<option value="true" selected>true</option>
+									<option value="false">false</option>
+								</c:when>
+								<c:otherwise>
+									<option value="true">true</option>
+									<option value="false" selected>false</option>
+								</c:otherwise>
+							</c:choose>
+					</select></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<input type="submit" value="수정">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</c:when>
+	<c:otherwise>
+		<h3>권한이 없습니다.</h3>
+	</c:otherwise>
+</c:choose>
+
+
+
+<jsp:include page="/layout/footer.jsp" />

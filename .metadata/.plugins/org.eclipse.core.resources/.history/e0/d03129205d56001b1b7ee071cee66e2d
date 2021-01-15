@@ -1,0 +1,34 @@
+package Controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class ManagementController {
+	public String doAction(HttpServletRequest request, HttpServletResponse response) {
+
+		String dest = "/WEB-INF/JSP/management.jsp";
+		String action = "";
+
+		if (request.getParameter("action") != null) {
+			action = request.getParameter("action");
+		}
+
+		if (action.equals("article")) {
+			dest = article(request, response);
+		} else if (action.equals("member")) {
+			dest = member(request, response);
+		}
+
+		return dest;
+	}
+
+	private String article(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("mng", true);
+		
+		return "";
+	}
+
+	private String member(HttpServletRequest request, HttpServletResponse response) {
+		return "";
+	}
+}

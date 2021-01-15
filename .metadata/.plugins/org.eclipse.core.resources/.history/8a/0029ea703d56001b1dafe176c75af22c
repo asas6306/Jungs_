@@ -1,0 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<jsp:include page="/layout/header.jsp" />
+
+<form action="">
+	<table border="1" class="table">
+		<caption>
+			<h2>마이 페이지 수정</h2>
+		</caption>
+		<tr>
+			<th>아이디</th>
+			<td>${m.ID}</td>
+		</tr>
+		<tr>
+			<th>닉네임</th>
+			<td><input type="text" name="nickname" value="${m.nickname}">
+			</td>
+		</tr>
+		<tr>
+			<th>등급</th>
+			<td>${m.mng ? "관리자" : "일반회원"}</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="button" value="수정"
+				onclick="location.href='/Board-Project1/member.do?action=PWcheck'">
+			</td>
+		</tr>
+	</table>
+</form>
+<jsp:include page="/layout/footer.jsp" />

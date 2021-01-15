@@ -1,0 +1,4 @@
+
+12월 16, 2020 11:16:10.426 NEW SESSION
+12월 16, 2020 11:16:10.426 [9120:2008:1216/111610.425:ERROR:device_event_log_impl.cc(211)] [11:16:10.424] Bluetooth: bluetooth_adapter_winrt.cc:1073 Getting Default Adapter failed.
+12월 16, 2020 11:16:11.208 [9120:15004:1216/111611.207:ERROR:get_updates_processor.cc(256)] PostClientToServerMessage() failed during GetUpdates with error 2

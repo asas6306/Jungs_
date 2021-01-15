@@ -1,0 +1,64 @@
+package Board;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import BoardUseEnum.ArticleDaoV2;
+import BoardUseEnum.CommentDao;
+import BoardUseEnum.MemberDaoV2;
+
+@WebServlet("/Co")
+public class Controller extends HttpServlet {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+
+		ArticleDaoV2 ad = new ArticleDaoV2();
+		MemberDaoV2 md = new MemberDaoV2();
+		CommentDao cd = new CommentDao();
+
+		String action = "";
+		String dest = "/main.jsp";
+		
+		if(request.getParameter("action")!=null) {
+			action = request.getParameter("action");
+		}
+
+		if (action.equals("list")) {
+			request.setAttribute("aa", ad.getaa());
+
+			dest = "/WEB-INF/JSP/list.jsp";
+			
+		} else if (action.equals("login")) {
+			dest = "/WEB-INF/JSP/login.jsp";
+			
+		} else if (action.equals("signup")) {
+			dest = "/WEB-INF/JSP/signup.jsp";
+			
+		} else if (action.equals("add")) {
+			dest = "/WEB-INF/JSP/add.jsp";
+			
+		}else if (action.equals("detail")) {
+			int articleid = Integer.parseInt(request.getParameter("articleid"));
+			request.setAttribute("article", ad.getArticleById(articleid));
+			
+			dest = "/WEB-INF/JSP/detail.jsp";
+			
+		}
+
+		RequestDispatcher rd = request.getRequestDispatcher(dest);
+		rd.forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+	}
+
+}

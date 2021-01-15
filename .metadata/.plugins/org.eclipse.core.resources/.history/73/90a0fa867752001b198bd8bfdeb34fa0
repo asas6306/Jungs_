@@ -1,0 +1,18 @@
+
+public class test {
+	public static void main(String[] args) {
+		String email = "asas6306@naver.com";
+		int emailLength = email.indexOf("@");
+		String[] emails = email.split("@");
+		
+		int length = emails[0].length();
+		
+//		emails[0].substring(beginIndex, endIndex)
+		
+		System.out.println(email);
+		System.out.println(emails[0]);
+		System.out.println(emails[1]);
+		System.out.println(emailLength);
+		System.out.println(length);
+	}
+}

@@ -1,0 +1,78 @@
+package BoardUseEnum;
+
+import java.util.Scanner;
+
+public class Management {
+	Scanner sc = new Scanner(System.in);
+	DBUtil db = new DBUtil();
+
+	public void mngBoard() {
+		while (true) {
+			System.out.println("1.유저관리 2.게시물관리 3.뒤로가기");
+			System.out.print(" > ");
+			int input = Integer.parseInt(sc.nextLine());
+
+			if (input == 1) {
+				mngMember();
+			} else if (input == 2) {
+				mngArticle();
+			} else if (input == 3) {
+				System.out.println("Go Back");
+				break;
+			} else {
+				System.out.println("Can't");
+			}
+		}
+	}
+
+	public void mngMember() {
+		MemberDaoV2 md = new MemberDaoV2();
+		while (true) {
+			md.listAll();
+			System.out.print("(break:-1) > ");
+			int index = Integer.parseInt(sc.nextLine());
+			if (index < 0)	 break;
+
+			String sql = "select * from member where userid = ?";
+			Member m = db.getRow(sql, new MemberMapper(), index);
+			md.memberInfo(m);
+
+			System.out.println("1.유저삭제 2.유저정지 3.뒤로가기");
+			System.out.print(" > ");
+			int input = Integer.parseInt(sc.nextLine());
+			if (input == 1) {
+				md.memberFire(index);
+			} else if (input == 2) {
+				String bsql = "update member set ban = not ban where userid = ?";
+				db.updateSQL(bsql, index);
+			} else if (input == 3) {
+				System.out.println("Go Back");
+				break;
+			} else {
+				System.out.println("Can't");
+			}
+		}
+	}
+	
+	public void mngArticle() {
+		ArticleDaoV2 ad = new ArticleDaoV2();
+		while(true) {
+			ad.listAll();
+			System.out.print("(break:-1) > ");
+			int index = Integer.parseInt(sc.nextLine());
+			if (index < 0) 	break;
+			
+			ad.listOne(index);
+			
+			System.out.println("1.게시물삭제 2.뒤로가기");
+			System.out.print(" > ");
+			int input = Integer.parseInt(sc.nextLine());
+			if(input == 1) {
+				ad.delete(index);
+			}else {
+				System.out.println("Go Back");
+				break;
+			}
+		}
+	}
+}

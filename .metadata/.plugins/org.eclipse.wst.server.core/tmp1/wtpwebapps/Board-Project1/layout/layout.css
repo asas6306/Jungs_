@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.headertop {
+	width: 80%;
+}
+
+.header, .footer {
+	width: 80%;
+	padding: 1em;
+	background: #2C2F8A;
+	color: #5673DB;
+	font: sans-serif;
+	font-weight: bold;
+}
+
+.main {
+	width: 80%;
+	padding: 1em;
+	min-height: 400px;
+	padding-top: 15px;
+	background: #5673DB;
+	color: #BADCF5;
+}
+
+.table {
+	border: 2px thin;
+	border-color: #2C2F8A;
+	font: sans-serif;
+	font-style: normal;
+	color: #2C2F8A;
+}

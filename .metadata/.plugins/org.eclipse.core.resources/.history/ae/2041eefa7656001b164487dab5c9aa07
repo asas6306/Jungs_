@@ -1,0 +1,40 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<jsp:include page="/layout/header.jsp" />
+
+<form action="/Board-Project1/member.do" method="post">
+	<table border="1" class="table">
+	<caption><h2>회원 관리 페이지</h2></caption>
+		<tr>
+			<th>회원번호</th>
+			<td>${member.userid}</td>
+		</tr>
+		<tr>
+			<th>아이디</th>
+			<td>${member.ID}</td>
+		</tr>
+		<tr>
+			<th>닉네임</th>
+			<td>${member.nickname}</td>
+		</tr>
+		<tr>
+			<th>상태</th>
+			<td>${member.state}</td>
+		</tr>
+		<tr>
+			<th>권한</th>
+			<td>${member.mng}</td>
+		</tr>
+		<tr>
+			<th>권한</th>
+			<td>
+				<select name="${member.mng}">
+					<option value="true">true</option>
+					<option value="false">false</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+</form>
+
+<jsp:include page="/layout/footer.jsp" />
