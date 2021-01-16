@@ -43,7 +43,7 @@
 				<tr>
 					<th>권한</th>
 					<td><select name="mng">
-							<c:choose>+-
+							<c:choose>
 								<c:when test="${m.userid==1}">
 									<td>${member.mng}</td>
 								</c:when>
