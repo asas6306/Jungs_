@@ -101,11 +101,11 @@ public class ArticleController {
 			int index = Integer.parseInt(request.getParameter("searchIndex"));
 			String body = request.getParameter("searchBody");
 			aa = ad.getSearchaa(sDate, index, body, orderIndex);
-			request.setAttribute("listStr", "/Board-Project1/article?action=list&" + "searchBody=" + body
+			request.setAttribute("listStr", "/Board-Project1/article.do?action=list&" + "searchBody=" + body
 					+ "&searchIndex=" + index + "&searchDate=" + sDate + "&pointer=");
 		} else {
 			aa = ad.getaa(orderIndex);
-			request.setAttribute("listStr", "/Board-Project1/article?action=list&pointer=");
+			request.setAttribute("listStr", "/Board-Project1/article.do?action=list&pointer=");
 		}
 
 		request.setAttribute("aa", page(request, response, aa));
@@ -159,14 +159,16 @@ public class ArticleController {
 				aa.add(caa.get(i));
 			}
 		}
-		
+
 		if (b == 0) {
 			request.setAttribute("leftend", true);
-		} 
+		}
 		if ((b == (block - 1)) || (block == 1)) {
 			request.setAttribute("rightend", true);
 		}
-		request.setAttribute("pointer", p);
+
+		HttpSession session = request.getSession();
+		session.setAttribute("pointer", p);
 		request.setAttribute("begin", begin);
 		request.setAttribute("end", end);
 
@@ -208,23 +210,29 @@ public class ArticleController {
 	}
 
 	private String detail(HttpServletRequest request, HttpServletResponse response) {
-		int aid = Integer.parseInt(request.getParameter("aid"));
-		request.setAttribute("a", ad.getArticleById(aid));
-		request.setAttribute("ca", cd.getComments(aid));
-		request.setAttribute("cra", cd.getCommentReply(aid));
-		int uid = Integer.parseInt(request.getParameter("uid"));
-		request.setAttribute("like", ad.likeCheck(aid, uid));
-		int pointer = Integer.parseInt(request.getParameter("pointer")) + 1;
-		HttpSession session = request.getSession();
-		session.setAttribute("pointer", pointer);
-		
-		
-		if (request.getParameter("hit") != null) {
-			request.getParameter("hit");
-			ad.upcntHit(aid);
+		String dest = "";
+		System.out.println(request.getParameter("uid"));
+		if (request.getParameter("uid") == null) {
+			request.setAttribute("failMsg", "게시판 이용을 위해 로그인이 필요합니다.");
+			
+			dest = "/WEB-INF/JSP/login.jsp";
+		} else {
+			int aid = Integer.parseInt(request.getParameter("aid"));
+			request.setAttribute("a", ad.getArticleById(aid));
+			request.setAttribute("ca", cd.getComments(aid));
+			request.setAttribute("cra", cd.getCommentReply(aid));
+			int uid = Integer.parseInt(request.getParameter("uid"));
+			request.setAttribute("like", ad.likeCheck(aid, uid));
+
+			if (request.getParameter("hit") != null) {
+				request.getParameter("hit");
+				ad.upcntHit(aid);
+			}
+
+			dest = "/WEB-INF/JSP/detail.jsp";
 		}
 
-		return "/WEB-INF/JSP/detail.jsp";
+		return dest;
 	}
 
 	private String like(HttpServletRequest request, HttpServletResponse response) {

@@ -211,7 +211,7 @@ public class ArticleController {
 
 	private String detail(HttpServletRequest request, HttpServletResponse response) {
 		String dest = "";
-		if (request.getParameter("uid").equals("")) {
+		if (request.getParameter("uid") == null) {
 			request.setAttribute("failMsg", "게시판 이용을 위해 로그인이 필요합니다.");
 			
 			dest = "/WEB-INF/JSP/login.jsp";

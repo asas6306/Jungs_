@@ -210,28 +210,19 @@ public class ArticleController {
 	}
 
 	private String detail(HttpServletRequest request, HttpServletResponse response) {
-		String dest = "";
-		if (request.getParameter("uid").equals("")) {
-			request.setAttribute("failMsg", "게시판 이용을 위해 로그인이 필요합니다.");
-			
-			dest = "/WEB-INF/JSP/login.jsp";
-		} else {
-			int aid = Integer.parseInt(request.getParameter("aid"));
-			request.setAttribute("a", ad.getArticleById(aid));
-			request.setAttribute("ca", cd.getComments(aid));
-			request.setAttribute("cra", cd.getCommentReply(aid));
-			int uid = Integer.parseInt(request.getParameter("uid"));
-			request.setAttribute("like", ad.likeCheck(aid, uid));
+		int aid = Integer.parseInt(request.getParameter("aid"));
+		request.setAttribute("a", ad.getArticleById(aid));
+		request.setAttribute("ca", cd.getComments(aid));
+		request.setAttribute("cra", cd.getCommentReply(aid));
+		int uid = Integer.parseInt(request.getParameter("uid"));
+		request.setAttribute("like", ad.likeCheck(aid, uid));
 
-			if (request.getParameter("hit") != null) {
-				request.getParameter("hit");
-				ad.upcntHit(aid);
-			}
-
-			dest = "/WEB-INF/JSP/detail.jsp";
+		if (request.getParameter("hit") != null) {
+			request.getParameter("hit");
+			ad.upcntHit(aid);
 		}
 
-		return dest;
+		return "/WEB-INF/JSP/detail.jsp";
 	}
 
 	private String like(HttpServletRequest request, HttpServletResponse response) {

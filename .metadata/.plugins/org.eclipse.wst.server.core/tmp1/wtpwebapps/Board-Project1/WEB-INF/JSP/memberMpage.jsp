@@ -22,7 +22,8 @@
 				</tr>
 				<tr>
 					<th>닉네임</th>
-					<td><input type="text" name="nickname" value="${member.nickname}"></td>
+					<td><input type="text" name="nickname"
+						value="${member.nickname}"></td>
 				</tr>
 				<tr>
 					<th>상태</th>
@@ -42,21 +43,27 @@
 				<tr>
 					<th>권한</th>
 					<td><select name="mng">
-							<c:choose>
-								<c:when test="${member.mng}">
-									<option value="true" selected>true</option>
-									<option value="false">false</option>
+							<c:choose>+-
+								<c:when test="${m.userid==1}">
+									<td>${member.mng}</td>
 								</c:when>
 								<c:otherwise>
-									<option value="true">true</option>
-									<option value="false" selected>false</option>
+								<c:choose>
+										<c:when test="${member.mng}">
+											<option value="true" selected>true</option>
+											<option value="false">false</option>
+										</c:when>
+										<c:otherwise>
+											<option value="true">true</option>
+											<option value="false" selected>false</option>
+										</c:otherwise>
+									</c:choose>
 								</c:otherwise>
 							</c:choose>
 					</select></td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center">
-						<input type="submit" value="수정">
+					<td colspan="2" align="center"><input type="submit" value="수정">
 					</td>
 				</tr>
 			</table>

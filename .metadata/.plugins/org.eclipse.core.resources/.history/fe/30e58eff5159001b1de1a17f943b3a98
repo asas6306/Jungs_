@@ -211,11 +211,9 @@ public class ArticleController {
 
 	private String detail(HttpServletRequest request, HttpServletResponse response) {
 		String dest = "";
-		if (request.getParameter("uid").equals("")) {
-			request.setAttribute("failMsg", "게시판 이용을 위해 로그인이 필요합니다.");
+		if(request.getParameter("uid")==null) {
 			
-			dest = "/WEB-INF/JSP/login.jsp";
-		} else {
+		}else {
 			int aid = Integer.parseInt(request.getParameter("aid"));
 			request.setAttribute("a", ad.getArticleById(aid));
 			request.setAttribute("ca", cd.getComments(aid));
@@ -230,7 +228,7 @@ public class ArticleController {
 
 			dest = "/WEB-INF/JSP/detail.jsp";
 		}
-
+		
 		return dest;
 	}
 
