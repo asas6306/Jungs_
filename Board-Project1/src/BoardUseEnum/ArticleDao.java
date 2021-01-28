@@ -8,13 +8,13 @@ public class ArticleDao {
 	DBUtil db = new DBUtil();
 
 	public ArrayList<Article> getaa() {
-		String sql = "select * from article left join member on article.userid = member.userid";
+		String sql = "select * from article left join member on article.uid = member.uid";
 		ArrayList<Article> aa = db.getRows(sql, new ArticleMapper());
 		return aa;
 	}
 
 	public ArrayList<Article> getaa(int orderIndex) {
-		String sql = "select * from article left join member on article.userid = member.userid";
+		String sql = "select * from article left join member on article.uid = member.uid";
 		if (orderIndex != 0) {
 			sql = sql + order(orderIndex);
 		}
@@ -22,31 +22,31 @@ public class ArticleDao {
 		return aa;
 	}
 
-	public void upcntHit(int articleid) {
-		String sql = "update article set hit = hit+1 where id = ?";
-		db.updateSQL(sql, articleid);
+	public void upcntHit(int aid) {
+		String sql = "update article set hit = hit+1 where aid = ?";
+		db.updateSQL(sql, aid);
 	}
 
-	public void add(String title, String body, int userid) { // 게시물 추가
-		String sql = "insert into article set title = ?, `body` = ?, userid = ?";
+	public void add(String title, String body, int uid) { // 게시물 추가
+		String sql = "insert into article set title = ?, `body` = ?, uid = ?";
 
-		db.updateSQL(sql, title, body, userid);
+		db.updateSQL(sql, title, body, uid);
 	}
 
 	public void update(String title, String body, int index) { // 게시물수정
-		String sql = "update article set title = ?, `body` = ? where id = ?";
+		String sql = "update article set title = ?, `body` = ? where aid = ?";
 
 		db.updateSQL(sql, title, body, index);
 
 	}
 
 	public void delete(int index) { // 게시물삭제
-		String asql = "DELETE FROM article WHERE id = ?";
+		String lsql = "DELETE FROM like WHERE aid = ?";
+		db.updateSQL(lsql, index);
+		String csql = "DELETE FROM comment WHERE aid = ?";
+		db.updateSQL(csql, index);
+		String asql = "DELETE FROM article WHERE aid = ?";
 		db.updateSQL(asql, index);
-		String csql = "DELETE FROM comment WHERE articleid = ?";
-		db.updateSQL(csql, index);
-		String lsql = "DELETE FROM like WHERE articleid = ?";
-		db.updateSQL(csql, index);
 	}
 
 	public String sortSql(int input) {
@@ -58,9 +58,9 @@ public class ArticleDao {
 		} else if (input == 4) {
 			strin = "member.nickname";
 		} else {
-			strin = "article.id desc";
+			strin = "article.aid desc";
 		}
-		String str = "select * from article left join member on article.userid = member.userid order by " + strin;
+		String str = "select * from article left join member on article.uid = member.uid order by " + strin;
 		return str;
 	}
 
@@ -72,7 +72,7 @@ public class ArticleDao {
 			sql = sql + order(orderIndex);
 		}
 //		좋아요 sql문... null도 1개로 카운트해서 실용성이 없음 ㅠㅠ null을 빼면 좋아요 0개인 개시물 안나옴 ㅠ
-//		sql = "SELECT a.*, COUNT(`like`) likecnt FROM (" + sql + ") a LEFT JOIN `like` ON a.id = `like`.articleid WHERE `like`.articleid IS NOT NULL GROUP BY a.id";
+//		sql = "SELECT a.*, COUNT(`like`) likecnt FROM (" + sql + ") a LEFT JOIN `like` ON a.id = `like`.aid WHERE `like`.aid IS NOT NULL GROUP BY a.id";
 
 		String searchBody = "%" + body + "%";
 		if (index == 1) {
@@ -85,9 +85,9 @@ public class ArticleDao {
 	}
 
 	public String getSearch(int sDate, int index) {
-		String str = "SELECT * FROM article LEFT JOIN MEMBER ON article.userid = member.userid ";
-//		SELECT * FROM article LEFT JOIN MEMBER ON article.userid = member.userid WHERE article.date > DATE_ADD(NOW(), INTERVAL -1 WEEK) HAVING title='a';
-//		SELECT * FROM (SELECT * FROM article WHERE DATE > DATE_ADD(NOW(), INTERVAL -1 WEEK)) a LEFT JOIN MEMBER ON a.userid =  member.userid WHERE title = 'a';
+		String str = "SELECT * FROM article LEFT JOIN MEMBER ON article.uid = member.uid ";
+//		SELECT * FROM article LEFT JOIN MEMBER ON article.uid = member.uid WHERE article.date > DATE_ADD(NOW(), INTERVAL -1 WEEK) HAVING title='a';
+//		SELECT * FROM (SELECT * FROM article WHERE DATE > DATE_ADD(NOW(), INTERVAL -1 WEEK)) a LEFT JOIN MEMBER ON a.uid =  member.uid WHERE title = 'a';
 
 		str = str + getsDate(sDate) + getsIndex(index);
 
@@ -144,11 +144,11 @@ public class ArticleDao {
 		return str;
 	}
 
-	public Article getArticleById(int id) {
+	public Article getArticleById(int aid) {
 		ArrayList<Article> aa = getaa();
 		Article a = null;
 		for (Article casha : aa) {
-			if (casha.getArticleid() == id) {
+			if (casha.getAid() == aid) {
 				a = casha;
 			}
 		}
@@ -159,11 +159,11 @@ public class ArticleDao {
 		String sql1 = "";
 		String sql2 = "";
 		if (like) {
-			sql1 = "update article set `like` = `like` + 1 where id = ?";
-			sql2 = "insert into `like` set articleid = ?, userid = ?";
+			sql1 = "update article set `like` = `like` + 1 where aid = ?";
+			sql2 = "insert into `like` set aid = ?, uid = ?";
 		} else {
-			sql1 = "update article set `like` = `like` - 1 where id = ?";
-			sql2 = "delete from `like` where articleid = ? and userid = ?";
+			sql1 = "update article set `like` = `like` - 1 where aid = ?";
+			sql2 = "delete from `like` where aid = ? and uid = ?";
 		}
 		
 		db.updateSQL(sql1, aid);
@@ -171,7 +171,7 @@ public class ArticleDao {
 	}
 	
 	public boolean likeCheck(int aid, int uid) {
-		String sql = "select * from `like` where articleid = ? and userid = ?";
+		String sql = "select * from `like` where aid = ? and uid = ?";
 		
 		return db.existCheck(sql, aid, uid);
 	}

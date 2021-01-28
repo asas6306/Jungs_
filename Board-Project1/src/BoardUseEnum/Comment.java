@@ -1,11 +1,11 @@
 package BoardUseEnum;
 
 public class Comment {
-	private int commentid;
-	private int userid;
-	private int articleid;
+	private int cid;
+	private int uid;
+	private int aid;
 	private String nickname;
-	private String date;
+	private String regDate;
 	private String body;
 	private int commentReply;
 	
@@ -22,29 +22,29 @@ public class Comment {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public int getCommentid() {
-		return commentid;
+	public int getCid() {
+		return cid;
 	}
-	public void setCommentid(int commentid) {
-		this.commentid = commentid;
+	public void setCid(int cid) {
+		this.cid = cid;
 	}
-	public int getUserid() {
-		return userid;
+	public int getUid() {
+		return uid;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUid(int uid) {
+		this.uid = uid;
 	}
-	public int getArticleid() {
-		return articleid;
+	public int getAid() {
+		return aid;
 	}
-	public void setArticleid(int articleid) {
-		this.articleid = articleid;
+	public void setAid(int aid) {
+		this.aid = aid;
 	}
-	public String getDate() {
-		return date;
+	public String getRegDate() {
+		return regDate;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setDate(String regDate) {
+		this.regDate = regDate;
 	}
 	public String getBody() {
 		return body;

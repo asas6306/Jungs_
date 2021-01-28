@@ -1,14 +1,22 @@
 package BoardUseEnum;
 
 public class Member {
-	private int userid = 0;
+	private int uid = 0;
 	private String ID = null;
 	private String PW = null;
 	private String nickname = "익명";
+	private String regDate = null;
 	private boolean state = false;
 	private boolean ban = false;
 	private boolean mng = false;
 	
+	
+	public String getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
 	public boolean isBan() {
 		return ban;
 	}
@@ -21,11 +29,11 @@ public class Member {
 	public void setMng(boolean mng) {
 		this.mng = mng;
 	}
-	public int getUserid() {
-		return userid;
+	public int getUid() {
+		return uid;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUid(int uid) {
+		this.uid = uid;
 	}
 	public String getID() {
 		return ID;

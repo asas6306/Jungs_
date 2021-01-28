@@ -1,12 +1,12 @@
 package BoardUseEnum;
 
 public class Article {
-	private int articleid;
+	private int aid;
 	private String title;
 	private String body;
-	private int userid;
+	private int uid;
 	private String nickname;
-	private String date;
+	private String regDate;
 	private int like;
 	private int hit;
 	
@@ -39,11 +39,11 @@ public class Article {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public int getArticleid() {
-		return articleid;
+	public int getAid() {
+		return aid;
 	}
-	public void setArticleid(int articleid) {
-		this.articleid = articleid;
+	public void setAid(int aid) {
+		this.aid = aid;
 	}
 	public String getTitle() {
 		return title;
@@ -57,17 +57,17 @@ public class Article {
 	public void setBody(String body) {
 		this.body = body;
 	}
-	public int getUserid() {
-		return userid;
+	public int getUid() {
+		return uid;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUid(int uid) {
+		this.uid = uid;
 	}
-	public String getDate() {
-		return date;
+	public String getRegDate() {
+		return regDate;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setDate(String regDate) {
+		this.regDate = regDate;
 	}
 	public int getHit() {
 		return hit;

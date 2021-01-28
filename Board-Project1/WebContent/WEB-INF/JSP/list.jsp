@@ -31,18 +31,18 @@
 	</tr>
 	<c:forEach var="a" items="${aa}">
 		<tr>
-			<td align="center">${a.articleid}</td>
+			<td align="center">${a.aid}</td>
 			<td width="100px" align="center">${a.nickname}</td>
 			<td width="150px"><a
-				href="/Board-Project1/article.do?action=detail&aid=${a.articleid}&uid=${m.userid}&hit=true&pointer=${pointer}">${a.title}</a>
+				href="/Board-Project1/article.do?action=detail&aid=${a.aid}&uid=${m.uid}&hit=true&pointer=${pointer}">${a.title}</a>
 			</td>
-			<td>${a.date}</td>
+			<td>${a.regDate}</td>
 			<td align="center">${a.like}</td>
 			<td align="center">${a.hit}</td>
 			<c:choose>
-				<c:when test="${a.userid==m.userid || mng}">
+				<c:when test="${a.uid==m.uid || mng}">
 					<td><input type="button" value="X"
-						onclick="location.href='/Board-Project1/article.do?action=delete&aid=${a.articleid}'">
+						onclick="location.href='/Board-Project1/article.do?action=delete&aid=${a.aid}'">
 					</td>
 				</c:when>
 			</c:choose>
@@ -52,7 +52,7 @@
 	<tr>
 		<c:choose>
 			<c:when test="${m.state}">
-				<td colspan="4" align="right"><input type="button" value="글쓰기"
+				<td colspan="6" align="right"><input type="button" value="글쓰기"
 					onclick="location.href='/Board-Project1/article.do?action=add'">
 				</td>
 			</c:when>

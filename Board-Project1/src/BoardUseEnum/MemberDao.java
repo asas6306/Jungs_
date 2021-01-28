@@ -14,7 +14,7 @@ public class MemberDao {
 	DBUtil db = new DBUtil();
 
 	public void signup(String inputID, String inputPW, String inputNickname) {
-		String sql = "insert into member set ID = ?, PW = ?, nickname = ?";
+		String sql = "insert into member set ID = ?, PW = ?, nickname = ?, email = 'abc'";
 		db.updateSQL(sql, inputID, inputPW, inputNickname);
 	}
 
@@ -30,7 +30,7 @@ public class MemberDao {
 	}
 	
 	public Member getMember(int userid) {
-		String sql = "select * from member where userid = ?";
+		String sql = "select * from member where uid = ?";
 		Member m = db.getRow(sql, new MemberMapper(), userid);
 		return m;
 	}
@@ -67,5 +67,16 @@ public class MemberDao {
 		String sql = "select * from member";
 		
 		return db.getRows(sql, new MemberMapper());
+	}
+	
+	public void resignMember(int uid) {
+		String lsql = "delete from `like` where uid = ?";
+		db.updateSQL(lsql, uid);
+		String csql = "delete from comment where uid = ?";
+		db.updateSQL(csql, uid);
+		String asql = "delete from article where uid = ?";
+		db.updateSQL(asql, uid);
+		String sql = "delete from `member` where uid = ?";
+		db.updateSQL(sql, uid);
 	}
 }

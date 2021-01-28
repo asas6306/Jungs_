@@ -9,10 +9,11 @@ public class MemberMapper implements RowMapper<Member> {
 	public Member getRow(ResultSet rs) throws SQLException {
 		Member m = new Member();
 		
-		m.setUserid(rs.getInt("userid"));
+		m.setUid(rs.getInt("uid"));
 		m.setID(rs.getString("ID"));
 		m.setPW(rs.getString("PW"));
 		m.setNickname(rs.getString("nickname"));
+		m.setRegDate(rs.getString("regDate"));
 		m.setBan(rs.getBoolean("ban"));
 		m.setMng(rs.getBoolean("mng"));
 		

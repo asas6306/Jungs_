@@ -10,8 +10,9 @@
 		<tr>
 			<th>비밀번호</th>
 			<td><input type="hidden" name="action" value="mypageUpdate">
-				<input type="password" name="PWcheck" placeholder="비밀번호를 입력하세요.">
-				<input type="hidden" name="PW" value="${m.PW}"></td>
+				<input type="hidden" name="page" value="${page}"> <input
+				type="password" name="PWcheck" placeholder="비밀번호를 입력하세요."> <input
+				type="hidden" name="PW" value="${m.PW}"></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center"><input type="submit" value="확인">

@@ -10,11 +10,11 @@ public class ArticleMapper implements RowMapper<Article> {
 		Article a = new Article();
 		
 		
-		a.setArticleid(rs.getInt("article.id"));
+		a.setAid(rs.getInt("article.aid"));
 		a.setTitle(rs.getString("title"));
 		a.setBody(rs.getString("body"));
-		a.setUserid(rs.getInt("userid"));
-		a.setDate(rs.getString("date"));
+		a.setUid(rs.getInt("uid"));
+		a.setDate(rs.getString("regDate"));
 		a.setHit(rs.getInt("hit"));
 		a.setNickname(rs.getString("nickname"));
 		a.setLike(rs.getInt("like"));

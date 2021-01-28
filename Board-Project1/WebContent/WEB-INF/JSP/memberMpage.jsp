@@ -11,10 +11,10 @@
 					<h2>회원 관리 페이지</h2>
 				</caption>
 				<input type="hidden" name="action" value="doMemberM">
-				<input type="hidden" name="uid" value="${member.userid}">
+				<input type="hidden" name="uid" value="${member.uid}">
 				<tr>
 					<th>회원번호</th>
-					<td>${member.userid}</td>
+					<td>${member.uid}</td>
 				</tr>
 				<tr>
 					<th>아이디</th>
@@ -43,21 +43,14 @@
 				<tr>
 					<th>권한</th>
 					<td><select name="mng">
-							<c:choose>+-
-								<c:when test="${m.userid==1}">
-									<td>${member.mng}</td>
+							<c:choose>
+								<c:when test="${member.mng}">
+									<option value="true" selected>true</option>
+									<option value="false">false</option>
 								</c:when>
 								<c:otherwise>
-								<c:choose>
-										<c:when test="${member.mng}">
-											<option value="true" selected>true</option>
-											<option value="false">false</option>
-										</c:when>
-										<c:otherwise>
-											<option value="true">true</option>
-											<option value="false" selected>false</option>
-										</c:otherwise>
-									</c:choose>
+									<option value="true">true</option>
+									<option value="false" selected>false</option>
 								</c:otherwise>
 							</c:choose>
 					</select></td>

@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/layout/header.jsp"%>
 
+
+<script>aaaa</script>
 <form action="/Board-Project1/member.do">
 	<table border="1" class="table">
 		<input type="hidden" name="action" value="doLogin">

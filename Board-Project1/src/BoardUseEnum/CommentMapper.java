@@ -9,10 +9,10 @@ public class CommentMapper implements RowMapper<Comment>{
 	public Comment getRow(ResultSet rs) throws SQLException {
 		Comment c = new Comment();
 		
-		c.setCommentid(rs.getInt("id"));
-		c.setUserid(rs.getInt("userid"));
-		c.setArticleid(rs.getInt("articleid"));
-		c.setDate(rs.getString("date"));
+		c.setCid(rs.getInt("cid"));
+		c.setUid(rs.getInt("uid"));
+		c.setAid(rs.getInt("aid"));
+		c.setDate(rs.getString("regDate"));
 		c.setBody(rs.getString("body"));
 		c.setNickname(rs.getString("nickname"));
 		c.setCommentReply(rs.getInt("commentreply"));

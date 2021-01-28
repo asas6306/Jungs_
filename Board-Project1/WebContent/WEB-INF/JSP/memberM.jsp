@@ -15,17 +15,17 @@
 	<c:forEach var="member" items="${am}">
 		<tr>
 			<td>${member.userid}</td>
-			<td><a href="/Board-Project1/member.do?action=memberMpage&uid=${member.userid}">${member.ID}</a></td>
+			<td><a href="/Board-Project1/member.do?action=memberMpage&uid=${member.uid}">${member.ID}</a></td>
 			<td>${member.nickname}</td>
 			<td>${member.state}</td>
 			<td>${member.mng}</td>
 		</tr>
-		<tr>
-			<td colspan="2" align="center">
+	</c:forEach>
+	<tr>
+			<td colspan="5" align="center">
 				<input type="button" value="뒤로가기" onclick="history.back()">
 			</td>
 		</tr>
-	</c:forEach>
 </table>
 
 <jsp:include page="/layout/footer.jsp" />

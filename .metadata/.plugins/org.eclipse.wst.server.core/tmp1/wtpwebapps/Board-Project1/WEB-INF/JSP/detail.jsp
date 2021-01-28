@@ -3,7 +3,7 @@
 <%@ include file="/layout/header.jsp" %>
 
 <table border="1" class="table">
-	<caption><h3>${a.articleid}번 게시물</h3></caption>
+	<caption><h3>${a.aid}번 게시물</h3></caption>
 		<tr>
 			<th>제목</th>
 			<td colspan="3">${a.title}</td>
@@ -12,7 +12,7 @@
 			<th>작성자</th>
 			<td>${a.nickname}</td>
 			<th>작성날짜</th>
-			<td>${a.date}</td>
+			<td>${a.regDate}</td>
 		</tr>
 		<tr>
 			<th>조회수</th>
@@ -25,11 +25,11 @@
 			<td colspan="3">${a.body}</td>
 		</tr>
 		<c:choose>
-			<c:when test="${a.userid == m.userid}">
+			<c:when test="${a.uid == m.uid}">
 				<tr>
 					<td colspan="4" align="center">
-						<input type="button" value="수정" onclick="location.href='/Board-Project1/article.do?action=update&aid=${a.articleid}'">
-						<input type="button" value="삭제" onclick="location.href='/Board-Project1/article.do?action=delete&aid=${a.articleid}'">
+						<input type="button" value="수정" onclick="location.href='/Board-Project1/article.do?action=update&aid=${a.aid}'">
+						<input type="button" value="삭제" onclick="location.href='/Board-Project1/article.do?action=delete&aid=${a.aid}'">
 					</td>
 				</tr>
 			</c:when>
@@ -45,13 +45,13 @@
 			<tr>
 				<td style="font-weight: bold;" align="center" width="100px">${c.nickname} </td>
 				<c:choose>
-					<c:when test="${check=='update'&&cid==c.commentid}">
+					<c:when test="${check=='update'&&cid==c.cid}">
 					<td>
 						<form action="/Board-Project1/article.do">
 							<input type="hidden" name="action" value="doUpdateComment">
 							<input type="text" name="body" value="${c.body}" required>
-							<input type="hidden" name="cid" value="${c.commentid}">
-							<input type="hidden" name="aid" value="${a.articleid}">
+							<input type="hidden" name="cid" value="${c.cid}">
+							<input type="hidden" name="aid" value="${a.aid}">
 							<input type="submit" value="수정">
 						</form>
 					</td> 
@@ -59,19 +59,19 @@
 					<c:otherwise>
 						<td style="width: 250px">${c.body} 
 						<c:choose>
-							<c:when test="${m.userid==c.userid}">
-								<a style="font-size: 70%" href="/Board-Project1/article.do?action=updateComment&cid=${c.commentid}&aid=${a.articleid}&uid=${m.userid}">수정</a>
+							<c:when test="${m.uid==c.uid}">
+								<a style="font-size: 70%" href="/Board-Project1/article.do?action=updateComment&cid=${c.cid}&aid=${a.aid}&uid=${m.uid}">수정</a>
 							</c:when>
 						</c:choose>
 						</td>
 					</c:otherwise>
 				</c:choose>
 				
-				<td style="font-size: 70%">${c.date} <a href="/Board-Project1/article.do?action=commentReply&cid=${c.commentid}&aid=${a.articleid}&uid=${m.userid}">답글</a></td>
+				<td style="font-size: 70%">${c.regDate} <a href="/Board-Project1/article.do?action=commentReply&cid=${c.cid}&aid=${a.aid}&uid=${m.uid}">답글</a></td>
 				<c:choose>
-					<c:when test="${m.userid==c.userid}">
+					<c:when test="${m.uid==c.uid}">
 						<td>
-							<input type="button" value="X" onclick="location.href='/Board-Project1/article.do?action=deleteComment&cid=${c.commentid}&aid=${a.articleid}&uid=${m.userid}'">
+							<input type="button" value="X" onclick="location.href='/Board-Project1/article.do?action=deleteComment&cid=${c.cid}&aid=${a.aid}&uid=${m.uid}'">
 						</td>
 					</c:when>
 				</c:choose>
@@ -79,17 +79,17 @@
 				<!-- @@ 대댓글 @@ -->
 			<c:forEach var="cr" items="${cra}">
 				<c:choose>
-					<c:when test="${cr.commentReply==c.commentid}">
+					<c:when test="${cr.commentReply==c.cid}">
 						<tr style="font-size: 80%">
 							<td align="right" style="font-weight: bold;">└>${cr.nickname}</td>
 							<c:choose>
-								<c:when test="${check=='update'&&cid==cr.commentid}">
+								<c:when test="${check=='update'&&cid==cr.cid}">
 								<td>
 									<form action="/Board-Project1/article.do">
 										<input type="hidden" name="action" value="doUpdateComment">
 										<input type="text" name="body" value="${cr.body}" required>
-										<input type="hidden" name="cid" value="${cr.commentid}">
-										<input type="hidden" name="aid" value="${a.articleid}">
+										<input type="hidden" name="cid" value="${cr.cid}">
+										<input type="hidden" name="aid" value="${a.aid}">
 										<input type="submit" value="수정">
 									</form>
 								</td> 
@@ -97,18 +97,18 @@
 								<c:otherwise>
 									<td>${cr.body}&nbsp
 										<c:choose>
-											<c:when test="${m.userid==cr.userid}">
-												<a style="font-size: 85%" href="/Board-Project1/article.do?action=updateComment&cid=${cr.commentid}&aid=${a.articleid}&uid=${m.userid}">수정</a>
+											<c:when test="${m.uid==cr.uid}">
+												<a style="font-size: 85%" href="/Board-Project1/article.do?action=updateComment&cid=${cr.cid}&aid=${a.aid}&uid=${m.uid}">수정</a>
 											</c:when>
 										</c:choose>
 									</td>
 								</c:otherwise>
 							</c:choose>
-								<td style="font-size: 85%">${cr.date}</td>
+								<td style="font-size: 85%">${cr.regDate}</td>
 							<c:choose>
-								<c:when test="${m.userid==cr.userid}">
+								<c:when test="${m.uid==cr.uid}">
 									<td>
-										<input type="button" value="X" onclick="location.href='/Board-Project1/article.do?action=deleteComment&cid=${cr.commentid}&aid=${a.articleid}&uid=${m.userid}'">
+										<input type="button" value="X" onclick="location.href='/Board-Project1/article.do?action=deleteComment&cid=${cr.cid}&aid=${a.aid}&uid=${m.uid}'">
 									</td>
 								</c:when>
 							</c:choose>
@@ -117,16 +117,16 @@
 				</c:choose>
 			</c:forEach>
 				<c:choose>
-					<c:when test="${check=='reply'&&cid==c.commentid}">
+					<c:when test="${check=='reply'&&cid==c.cid}">
 						<tr>
 							<td align="center">답글</td>
 							<td>
 							<form action="/Board-Project1/article.do">
 								<input type="hidden" name="action" value="doCommentReply">
 								<input type="text" name="body" required>
-								<input type="hidden" name="cid" value="${c.commentid}">
-								<input type="hidden" name="aid" value="${a.articleid}">
-								<input type="hidden" name="uid" value="${m.userid}">
+								<input type="hidden" name="cid" value="${c.cid}">
+								<input type="hidden" name="aid" value="${a.aid}">
+								<input type="hidden" name="uid" value="${m.uid}">
 								<input type="submit" value="입력">
 							</form>
 							</td>
@@ -139,8 +139,8 @@
 					<td colspan="3" align="center">
 						<input type="hidden" name="action" value="addComment">
 						<input type="text" name="body" placeholder="댓글을 입력하세요." required>
-						<input type="hidden" name="uid" value="${m.userid}">
-						<input type="hidden" name="aid" value="${a.articleid}">
+						<input type="hidden" name="uid" value="${m.uid}">
+						<input type="hidden" name="aid" value="${a.aid}">
 					</td>
 					<td align="center">
 						<input type="submit" value="입력">
@@ -157,10 +157,10 @@
 				<c:when test="${m.state}">
 					<c:choose>
 						<c:when test="${like}">
-							<input type="button" value="좋아요 취소" onclick="location.href='/Board-Project1/article.do?action=like&uid=${m.userid}&aid=${a.articleid}&like=false'">
+							<input type="button" value="좋아요 취소" onclick="location.href='/Board-Project1/article.do?action=like&uid=${m.uid}&aid=${a.aid}&like=false'">
 						</c:when>
 						<c:otherwise>
-							<input type="button" value="좋아요" onclick="location.href='/Board-Project1/article.do?action=like&uid=${m.userid}&aid=${a.articleid}&like=true'">
+							<input type="button" value="좋아요" onclick="location.href='/Board-Project1/article.do?action=like&uid=${m.uid}&aid=${a.aid}&like=true'">
 						</c:otherwise>
 					</c:choose>
 				</c:when>

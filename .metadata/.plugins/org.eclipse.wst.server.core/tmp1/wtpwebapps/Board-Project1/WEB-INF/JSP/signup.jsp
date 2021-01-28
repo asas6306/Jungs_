@@ -2,12 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/layout/header.jsp"%>
 
-<form action="/Board-Project1/member">
+<form action="/Board-Project1/member.do">
 	<table border="1" class="table">
 		<caption>
 			<h3>회원가입</h3>
 		</caption>
-		<input type="hidden" name="action" value="doSignup.do">
+		<input type="hidden" name="action" value="doSignup">
 		<tr>
 			<th>아이디</th>
 			<td><input type="text" name="ID" placeholder="아이디를 입력하세요."

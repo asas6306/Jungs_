@@ -44,7 +44,7 @@ public class MemberController {
 			dest = "/WEB-INF/JSP/mypage.jsp";
 
 		} else if (action.equals("PWcheck")) {
-			dest = "/WEB-INF/JSP/PWcheck.jsp";
+			dest = PWcheck(request, response);
 
 		} else if (action.equals("mypageUpdate")) {
 			dest = mypageUpdate(request, response);
@@ -61,7 +61,10 @@ public class MemberController {
 		} else if (action.equals("doMemberM")) {
 			dest = doMemberM(request, response);
 			
-		}
+		} else if (action.equals("resign")) {
+			dest = resign(request, response);
+			
+		} 
 		
 		return dest;
 	}
@@ -92,7 +95,7 @@ public class MemberController {
 			request.setAttribute("NNc", "중복된 닉네임 입니다.");
 		} else if (cnt == 0) {
 			md.signup(ID, PW, nickname);
-
+			request.setAttribute("state", true);
 			dest = "/WEB-INF/JSP/login.jsp";
 		}
 
@@ -129,23 +132,36 @@ public class MemberController {
 
 		return "/WEB-INF/JSP/main.jsp";
 	}
+	
+	private String PWcheck(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("page", request.getParameter("page"));
+		
+		return "/WEB-INF/JSP/PWcheck.jsp";
+	}
 
-	public String mypageUpdate(HttpServletRequest request, HttpServletResponse response) {
+	private String mypageUpdate(HttpServletRequest request, HttpServletResponse response) {
 		String PW1 = request.getParameter("PW");
 		String PW2 = request.getParameter("PWcheck");
+		String getPage = request.getParameter("page");
 
 		String dest = "";
 		if (PW1.equals(PW2)) {
-			dest = "/WEB-INF/JSP/mypageUpdate.jsp";
+			if(getPage.equals("update")) {
+				dest = "/WEB-INF/JSP/mypageUpdate.jsp";				
+			} else {
+				dest = "/WEB-INF/JSP/resignCheck.jsp";
+			}
 		} else {
 			request.setAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			request.setAttribute("page", request.getParameter("page"));
+			
 			dest = "/WEB-INF/JSP/PWcheck.jsp";
 		}
 
 		return dest;
 	}
 	
-	public String doMypageUpdate(HttpServletRequest request, HttpServletResponse response) {
+	private String doMypageUpdate(HttpServletRequest request, HttpServletResponse response) {
 		String ID = request.getParameter("ID");
 		String nickname = request.getParameter("nickname");
 		String PW1 = request.getParameter("PW1");
@@ -166,6 +182,8 @@ public class MemberController {
 			md.updateMember(ID, PW1, nickname);
 			
 			Member m = md.getMember(ID, PW1);
+			m.setState(true);
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("m", m);
 			
@@ -175,14 +193,14 @@ public class MemberController {
 		return dest;
 	}
 	
-	public String memberM(HttpServletRequest request, HttpServletResponse response) {
+	private String memberM(HttpServletRequest request, HttpServletResponse response) {
 		ArrayList<Member> am = md.getMembers();
 		request.setAttribute("am", am);
 		
 		return "/WEB-INF/JSP/memberM.jsp";
 	}
 	
-	public String memberMpage(HttpServletRequest request, HttpServletResponse response) {
+	private String memberMpage(HttpServletRequest request, HttpServletResponse response) {
 		int uid = Integer.parseInt(request.getParameter("uid"));
 		Member m = md.getMember(uid);
 		
@@ -191,7 +209,7 @@ public class MemberController {
 		return "/WEB-INF/JSP/memberMpage.jsp";
 	}
 	
-	public String doMemberM(HttpServletRequest request, HttpServletResponse response) {
+	private String doMemberM(HttpServletRequest request, HttpServletResponse response) {
 		int uid = Integer.parseInt(request.getParameter("uid"));
 		Member m = md.getMember(uid);
 		m.setID(request.getParameter("ID"));
@@ -202,5 +220,15 @@ public class MemberController {
 		md.updateMember(m);
 		
 		return memberMpage(request, response);
+	}
+	
+	private String resign(HttpServletRequest request, HttpServletResponse response) {
+		int uid = Integer.parseInt(request.getParameter("uid"));
+		md.resignMember(uid);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("m", new Member());
+		
+		return "/WEB-INF/JSP/login.jsp";
 	}
 }

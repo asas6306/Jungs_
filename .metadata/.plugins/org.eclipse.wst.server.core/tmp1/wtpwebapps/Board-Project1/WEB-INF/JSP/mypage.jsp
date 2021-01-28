@@ -20,7 +20,9 @@
 	</tr>
 	<tr>
 		<td colspan="2" align="center"><input type="button" value="수정"
-			onclick="location.href='/Board-Project1/member.do?action=PWcheck'">
+			onclick="location.href='/Board-Project1/member.do?action=PWcheck&page=update'">
+			<input type="button" value="회원탈퇴"
+			onclick="location.href='/Board-Project1/member.do?action=PWcheck&page=resign'">
 		</td>
 	</tr>
 </table>

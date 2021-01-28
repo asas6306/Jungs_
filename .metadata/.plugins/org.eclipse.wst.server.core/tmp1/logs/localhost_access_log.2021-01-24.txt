@@ -1,0 +1,7 @@
+127.0.0.1 - - [24/Jan/2021:09:43:00 +0900] "GET / HTTP/1.1" 200 11355
+127.0.0.1 - - [24/Jan/2021:09:43:02 +0900] "GET /Board-Project1/layout/test.jsp HTTP/1.1" 200 894
+127.0.0.1 - - [24/Jan/2021:09:43:02 +0900] "GET /Board-Project1/layout/layout.css HTTP/1.1" 200 434
+127.0.0.1 - - [24/Jan/2021:09:43:02 +0900] "GET /favicon.ico HTTP/1.1" 200 21630
+127.0.0.1 - - [24/Jan/2021:09:43:04 +0900] "GET /Board-Project1/main.do?action=introduce HTTP/1.1" 200 2015
+127.0.0.1 - - [24/Jan/2021:09:43:04 +0900] "GET /Board-Project1/img/profile.jpg HTTP/1.1" 200 3585872
+127.0.0.1 - - [24/Jan/2021:09:43:05 +0900] "GET /Board-Project1/article.do?action=list HTTP/1.1" 500 1643

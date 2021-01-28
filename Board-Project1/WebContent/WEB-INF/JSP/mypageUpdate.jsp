@@ -5,7 +5,7 @@
 <form action="/Board-Project1/member.do" method="post">
 	<table border="1" class="table">
 		<caption>
-			<h2>마이 페이지 수정</h2>
+			<h2>마이 페이지 수정?</h2>
 		</caption>
 		<input type="hidden" name="action" value="doMypageUpdate">
 		<input type="hidden" name="ID" value="${m.ID}">

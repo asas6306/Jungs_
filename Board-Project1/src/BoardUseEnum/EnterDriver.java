@@ -32,39 +32,41 @@ public class EnterDriver {
 
 //	sql 실습용 초기 명령어
 //	CREATE DATABASE board;
-//
 //	USE Board;
-//
 //	CREATE TABLE article(
-//	id INT(5) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-//	title CHAR(100) NOT NULL,
+//	aid INT(5) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+//	title CHAR(30) NOT NULL,
 //	`body` TEXT  NOT NULL,
-//	userid INT(5) NOT NULL,
-//	`date` CHAR(30) DEFAULT NOW(),
+//	uid INT(5) UNSIGNED NOT NULL,
+//	regDate DATE DEFAULT NOW(),
 //	`like` INT(5) DEFAULT 0,
-//	hit INT(5) DEFAULT 0
+//	hit INT(5) DEFAULT 0,
+//	FOREIGN KEY (uid) REFERENCES `member`(uid)
 //	);
 //	CREATE TABLE `member`(
-//	userid INT(5) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-//	ID CHAR(30) NOT NULL,
-//	PW CHAR(30) NOT NULL,
-//	nickname CHAR(30) NOT NULL,
-//	`date` char(30) DEFAULT NOW(),
-//	ban boolean default false,
-//	mng boolean default false
+//	uid INT(5) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+//	ID CHAR(10) NOT NULL,
+//	PW CHAR(15) NOT NULL,
+//	nickname CHAR(15) NOT NULL,
+//	email CHAR(25) NOT NULL,
+//	regDate DATE DEFAULT NOW(),
+//	ban BOOLEAN DEFAULT FALSE,
+//	mng BOOLEAN DEFAULT FALSE
 //	);
 //	CREATE TABLE `comment`(
-//	id INT(5) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-//	userid INT(5) NOT NULL,
-//	articleid  INT(5) NOT NULL,
-//	`date` CHAR(30) DEFAULT NOW(),
+//	cid INT(5) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+//	uid INT(5) UNSIGNED NOT NULL,
+//	aid INT(5) UNSIGNED NOT NULL,
+//	regDate DATE DEFAULT NOW(),
 //	`body` TEXT,
-//	commentreply int(5)
+//	commentreply INT(5),
+//	FOREIGN KEY (aid) REFERENCES article(aid),
+//	FOREIGN KEY (uid) REFERENCES MEMBER(uid)
 //	);
 //	CREATE TABLE `like`(
-//	articleid INT(5) NOT NULL,
-//	userid INT(5) NOT NULL
+//	aid INT(5) UNSIGNED NOT NULL,
+//	uid INT(5) UNSIGNED NOT NULL,
+//	FOREIGN KEY (aid) REFERENCES article(aid),
+//	FOREIGN KEY (uid) REFERENCES MEMBER(uid)
 //	);
-//	
-//	게시물 갯수 + 댓글 갯수 > 등급조정
 }

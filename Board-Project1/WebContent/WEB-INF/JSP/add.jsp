@@ -20,7 +20,7 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center"><input type="hidden" name="uid"
-				value="${m.userid}"> <input type="submit" value="작성하기">
+				value="${m.uid}"> <input type="submit" value="작성하기">
 			</td>
 		</tr>
 	</table>
