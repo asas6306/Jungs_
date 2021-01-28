@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/layout/header.jsp"%>
 
-<form action="/Board-Project1/member.do">
+<form action="/Board-Project1/member.do" method="post">
 	<table border="1" class="table">
 		<caption>
 			<h3>회원가입</h3>

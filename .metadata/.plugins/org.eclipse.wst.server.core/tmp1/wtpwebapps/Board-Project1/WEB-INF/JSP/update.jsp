@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/layout/header.jsp"%>
 
-<form action="/Board-Project1/article.do">
+<form action="/Board-Project1/article.do" method="post">
 	<table border="1" class="table">
 		<input type="hidden" name="action" value="doUpdate">
 		<caption>

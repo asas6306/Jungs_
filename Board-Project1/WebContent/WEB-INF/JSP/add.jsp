@@ -5,7 +5,7 @@
 
 <form action="/Board-Project1/article.do">
 	<table border="1" class="table">
-		<input type="hidden" name="action" value="doAdd">
+		<input type="hidden" name="action" value="doAdd" method="post">
 		<caption>
 			<h3>게시물 작성</h3>
 		</caption>

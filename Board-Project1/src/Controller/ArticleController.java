@@ -227,6 +227,9 @@ public class ArticleController {
 				request.getParameter("hit");
 				ad.upcntHit(aid);
 			}
+			
+			Article a = ad.getArticleById(aid);
+			request.setAttribute("a", a);
 
 			dest = "/WEB-INF/JSP/detail.jsp";
 		}

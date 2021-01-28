@@ -47,7 +47,7 @@
 				<c:choose>
 					<c:when test="${check=='update'&&cid==c.cid}">
 					<td>
-						<form action="/Board-Project1/article.do">
+						<form action="/Board-Project1/article.do" method="post">
 							<input type="hidden" name="action" value="doUpdateComment">
 							<input type="text" name="body" value="${c.body}" required>
 							<input type="hidden" name="cid" value="${c.cid}">
@@ -85,7 +85,7 @@
 							<c:choose>
 								<c:when test="${check=='update'&&cid==cr.cid}">
 								<td>
-									<form action="/Board-Project1/article.do">
+									<form action="/Board-Project1/article.do" method="post">
 										<input type="hidden" name="action" value="doUpdateComment">
 										<input type="text" name="body" value="${cr.body}" required>
 										<input type="hidden" name="cid" value="${cr.cid}">
@@ -121,7 +121,7 @@
 						<tr>
 							<td align="center">답글</td>
 							<td>
-							<form action="/Board-Project1/article.do">
+							<form action="/Board-Project1/article.do" method="post">
 								<input type="hidden" name="action" value="doCommentReply">
 								<input type="text" name="body" required>
 								<input type="hidden" name="cid" value="${c.cid}">
@@ -135,7 +135,7 @@
 				</c:choose>
 				</c:forEach>
 				<tr>
-				<form action="/Board-Project1/article.do">
+				<form action="/Board-Project1/article.do" method="post">
 					<td colspan="3" align="center">
 						<input type="hidden" name="action" value="addComment">
 						<input type="text" name="body" placeholder="댓글을 입력하세요." required>

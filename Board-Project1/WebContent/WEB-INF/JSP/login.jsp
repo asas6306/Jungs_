@@ -4,9 +4,9 @@
 
 
 <script>aaaa</script>
-<form action="/Board-Project1/member.do">
+<form action="/Board-Project1/member.do" method="post">
 	<table border="1" class="table">
-		<input type="hidden" name="action" value="doLogin">
+		<input type="hidden" name="action" value="doLogin" method="post">
 		<caption>
 			<h3>로그인 페이지</h3>
 		</caption>
